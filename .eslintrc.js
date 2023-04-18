@@ -28,7 +28,6 @@ module.exports = {
       "error",
       {
         groups: [["builtin", "external", "internal"]],
-        "newlines-between": "always",
       },
     ],
     "react-hooks/rules-of-hooks": "error",
