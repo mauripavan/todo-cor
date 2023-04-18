@@ -1,10 +1,26 @@
 import React from 'react';
 
+import AddItem from './components/AddItem';
+import Logo from './components/Logo';
+import TodoItem from './components/TodoItem';
+import {MainContainer, TodoWrapper} from './styles';
+
 const App = () => {
   return (
-    <div style={{}}>
-      <h1>TODO APP</h1>
-    </div>
+    <MainContainer>
+      <Logo />
+      <TodoWrapper>
+        <AddItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+      </TodoWrapper>
+    </MainContainer>
   );
 };
 
