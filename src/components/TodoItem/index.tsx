@@ -1,23 +1,33 @@
 import * as React from 'react';
 import {icons} from '../../assets/icons';
-import {Checkmark, MainWrapper, SubWrapper, TrashIcon} from './styles';
+import {Todo} from '../TodoList/types';
+import {
+  Checkmark,
+  CheckmarkWrapper,
+  ItemTitle,
+  MainWrapper,
+  NoCheckmark,
+  SubWrapper,
+  TrashIcon,
+} from './styles';
 
-export interface ITodoItemProps {
-  title?: string;
-  description?: string;
-  state?: string;
-  priority?: string;
-}
+const TodoItem = (props: Todo) => {
+  const {trash, check} = icons;
+  const {title, handleSetCompleted, id, completed, handleDelete} = props;
 
-const TodoItem = () => {
-  const {trash} = icons;
   return (
-    <MainWrapper>
+    <MainWrapper completed={completed}>
       <SubWrapper>
-        <Checkmark />
-        <p style={{color: 'white'}}>{'Todo Item'}</p>
+        {completed ? (
+          <CheckmarkWrapper onClick={() => handleSetCompleted(id)}>
+            <Checkmark src={check} />
+          </CheckmarkWrapper>
+        ) : (
+          <NoCheckmark onClick={() => handleSetCompleted(id)} />
+        )}
+        <ItemTitle completed={completed}>{title}</ItemTitle>
       </SubWrapper>
-      <TrashIcon src={trash} />
+      <TrashIcon src={trash} onClick={() => handleDelete(id)} />
     </MainWrapper>
   );
 };
