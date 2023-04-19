@@ -1,25 +1,20 @@
 import * as React from 'react';
+import {useRecoilValue} from 'recoil';
+import {filteredTodoListState} from '../../store/app-state';
 import TodoItem from '../TodoItem';
 import {EmptyStateWrapper, MainContainer} from './styles';
 import {Todo} from './types';
 
-export interface ITodoListProps {
-  todos: Todo[];
-  handleSetCompleted: (k: number) => void;
-  handleDelete: (k: number) => void;
-}
-
-const TodoList = (props: ITodoListProps) => {
-  const {todos, handleSetCompleted, handleDelete} = props;
-
+const TodoList = () => {
+  const filteredTodos = useRecoilValue<Todo[]>(filteredTodoListState);
   return (
     <MainContainer>
-      {!todos[0] ? (
+      {!filteredTodos[0] ? (
         <EmptyStateWrapper>
           <p>Nothing here yet! </p>
         </EmptyStateWrapper>
       ) : (
-        todos.map((todo) => {
+        filteredTodos.map((todo) => {
           return (
             <TodoItem
               id={todo.id}
@@ -29,8 +24,6 @@ const TodoList = (props: ITodoListProps) => {
               state={todo.state}
               completed={todo.completed}
               key={todo.id}
-              handleSetCompleted={handleSetCompleted}
-              handleDelete={handleDelete}
             />
           );
         })

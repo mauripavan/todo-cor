@@ -5,6 +5,4 @@ export type Todo = {
   state: string;
   priority: string;
   completed: boolean;
-  handleSetCompleted?: any;
-  handleDelete?: any;
 };

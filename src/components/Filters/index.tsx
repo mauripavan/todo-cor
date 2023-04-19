@@ -1,17 +1,34 @@
 import * as React from 'react';
+import {useRecoilState} from 'recoil';
+import {activeFilterState, todoListState} from '../../store/app-state';
 import FilterButton from '../FilterButton';
 import {ClearButtonWrapper, FilterBarWrapper, MainWrapper} from './styles';
-import {IFilterProps} from './types';
 
-const Filters = (props: IFilterProps) => {
-  const {
-    showAllTodos,
-    handleClearCompleted,
-    showCompletedTodos,
-    showInProgressTodos,
-    showNewTodos,
-    activeFilter,
-  } = props;
+const Filters = () => {
+  const [todos, setTodos] = useRecoilState(todoListState);
+  const [activeFilter, setActiveFilter] = useRecoilState(activeFilterState);
+
+  const showAllTodos = () => {
+    setActiveFilter('all');
+  };
+
+  const showInProgressTodos = () => {
+    setActiveFilter('in progress');
+  };
+
+  const showCompletedTodos = () => {
+    setActiveFilter('completed');
+  };
+
+  const showNewTodos = () => {
+    setActiveFilter('new');
+  };
+
+  const handleClearCompleted = () => {
+    const updatedList = todos.filter((todos) => !todos.completed);
+    setTodos(updatedList);
+  };
+
   return (
     <>
       <MainWrapper>
