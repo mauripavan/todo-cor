@@ -60,16 +60,29 @@ const TodoItem = (item: Todo) => {
       <SubWrapper>
         <TitleWrapper>
           {completed ? (
-            <CheckmarkWrapper onClick={() => handleSetCompleted(id)}>
+            <CheckmarkWrapper
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSetCompleted(id);
+              }}
+            >
               <Checkmark src={check} />
             </CheckmarkWrapper>
           ) : (
-            <NoCheckmark onClick={() => handleSetCompleted(id)} />
+            <NoCheckmark
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSetCompleted(id);
+              }}
+            />
           )}
           <ItemTitle completed={completed}>{title}</ItemTitle>
         </TitleWrapper>
         <TrashIcon
-          onClick={() => handleDelete(id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete(id);
+          }}
           style={{height: '1.2em', width: '1.2em', color: 'white'}}
         />
       </SubWrapper>

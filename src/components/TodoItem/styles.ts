@@ -40,11 +40,10 @@ export const Checkmark = styled.img`
 
 export const CheckmarkWrapper = styled.div`
   border: 1px solid gray;
-  border-radius: 100px;
   height: 1.2em;
   width: 1.2em;
   margin-right: 10px;
-  background-color: red;
+  border-radius: 50px;
 `;
 
 export const ItemTitle = styled.p<ItemTitleProps>`
