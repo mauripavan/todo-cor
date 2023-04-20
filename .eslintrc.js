@@ -1,6 +1,6 @@
 /* eslint-disable */
 module.exports = {
-  env: { browser: true, es6: true, jest: true, node: true, commonjs: true },
+  env: { browser: false, es6: true, jest: true, node: true, commonjs: true },
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
