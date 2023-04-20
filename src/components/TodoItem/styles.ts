@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 
+export type ItemTitleProps = {
+  completed: boolean;
+};
+
+export type ItemStateProps = {
+  state: string;
+};
+
+export type ItemPriorityProps = {
+  priority: string;
+};
+
 export type ItemProps = {
-  completed?: boolean;
+  completed: boolean;
 };
 
 export const MainWrapper = styled.div<ItemProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
   width: 70%;
   margin: 0px auto;
   border-radius: 10px;
@@ -46,12 +59,24 @@ export const CheckmarkWrapper = styled.div`
   background-color: red;
 `;
 
-export const TrashIcon = styled.img`
-  width: 1em;
-  height: 1em;
-`;
-
-export const ItemTitle = styled.p<ItemProps>`
+export const ItemTitle = styled.p<ItemTitleProps>`
   color: ${({completed}) => (completed ? 'gray' : '#fff')};
   text-decoration: ${({completed}) => (completed ? 'line-through' : 'none')};
+`;
+
+export const ItemState = styled.p<ItemStateProps>`
+  color: ${({state}) => (state === 'new' ? 'orange' : 'green')};
+  margin: 0px 5px;
+  font-size: 10px;
+`;
+export const ItemPriority = styled.p<ItemPriorityProps>`
+  color: ${({priority}) =>
+    priority === 'high' ? 'red' : priority === 'medium' ? 'pink' : 'lightblue'};
+  margin: 0px 5px;
+  font-style: italic;
+  font-size: 10px;
+`;
+
+export const Separator = styled.p`
+  font-size: 10px;
 `;

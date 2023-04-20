@@ -1,40 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useRecoilState} from 'recoil';
-import {todoListState} from '../../store/app-state';
+import {modalState} from '../../store/app-state';
 
 import {AddButton, CustomInput, MainWrapper} from './styles';
+import {IAddItemProps} from './type';
 
-const AddItem = () => {
-  const [title, setTitle] = useState('');
-  const [todos, setTodos] = useRecoilState(todoListState);
+const AddItem = (props: IAddItemProps) => {
+  const [, setModalVisible] = useRecoilState(modalState);
+  const {searchTitle, setSearchTitle} = props;
 
   const handleAddItem = () => {
-    title && addTodo(title);
-    setTitle('');
+    searchTitle && setModalVisible(true);
   };
 
   const handleKeyDown = (e: any) => {
-    if (e.keyCode === 13 && title) {
-      addTodo(title);
-      setTitle('');
+    if (e.keyCode === 13 && searchTitle) {
+      setModalVisible(true);
     }
-  };
-
-  const addTodo = (title: string) => {
-    const lastId = todos.length > 0 ? todos[todos.length - 1].id : 1;
-
-    const newTodo = {
-      id: lastId + 1,
-      title,
-      description: '',
-      priority: '',
-      state: 'new',
-      completed: false,
-    };
-
-    const todoList = [...todos];
-    todoList.push(newTodo);
-    setTodos(todoList);
   };
 
   return (
@@ -42,8 +24,8 @@ const AddItem = () => {
       <CustomInput
         type="text"
         placeholder="What's next?"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
+        onChange={(e) => setSearchTitle(e.target.value)}
+        value={searchTitle}
         onKeyDown={handleKeyDown}
       />
       <AddButton onClick={handleAddItem}>+</AddButton>

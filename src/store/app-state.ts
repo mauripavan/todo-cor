@@ -15,3 +15,13 @@ export const filteredTodoListState = atom<Todo[]>({
   key: 'FilteredTodoListState',
   default: [],
 });
+
+export const selectedTodoItem = atom<Todo | undefined>({
+  key: 'SelectedTodoItem',
+  default: undefined,
+});
+
+export const modalState = atom<boolean>({
+  key: 'ModalState',
+  default: false,
+});

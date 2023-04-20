@@ -12,7 +12,6 @@ export const MainContainer = styled.div`
 
 export const TodoWrapper = styled.div`
   background-color: #31315c;
-  height: 70vh;
   width: 50vw;
   border-radius: 10px;
 `;

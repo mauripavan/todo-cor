@@ -1,21 +1,37 @@
 import * as React from 'react';
 import {useRecoilState} from 'recoil';
+import {TrashIcon} from '@heroicons/react/24/solid';
 import {icons} from '../../assets/icons';
-import {todoListState} from '../../store/app-state';
+import {
+  modalState,
+  selectedTodoItem,
+  todoListState,
+} from '../../store/app-state';
 import {Todo} from '../TodoList/types';
 import {
   Checkmark,
   CheckmarkWrapper,
+  ItemPriority,
+  ItemState,
   ItemTitle,
   MainWrapper,
   NoCheckmark,
+  Separator,
   SubWrapper,
-  TrashIcon,
 } from './styles';
 
-const TodoItem = (props: Todo) => {
-  const {trash, check} = icons;
-  const {title, id, completed} = props;
+const TodoItem = (item: Todo) => {
+  const {check} = icons;
+  const {title, id, completed, state, priority} = item;
+  const [, setSelectedTodoItem] = useRecoilState<Todo | undefined>(
+    selectedTodoItem,
+  );
+  const [, setModalState] = useRecoilState<boolean>(modalState);
+
+  const handleTodoItemClick = () => {
+    setSelectedTodoItem(item);
+    setModalState(true);
+  };
 
   const [todos, setTodos] = useRecoilState(todoListState);
 
@@ -25,9 +41,9 @@ const TodoItem = (props: Todo) => {
         return {
           ...todo,
           completed: !todo.completed,
+          state: !todo.completed ? '' : 'new',
         };
       }
-      console.log(todo);
       return todo;
     });
     setTodos(updatedList);
@@ -39,7 +55,7 @@ const TodoItem = (props: Todo) => {
   };
 
   return (
-    <MainWrapper completed={completed}>
+    <MainWrapper completed={completed} onClick={handleTodoItemClick}>
       <SubWrapper>
         {completed ? (
           <CheckmarkWrapper onClick={() => handleSetCompleted(id)}>
@@ -49,8 +65,14 @@ const TodoItem = (props: Todo) => {
           <NoCheckmark onClick={() => handleSetCompleted(id)} />
         )}
         <ItemTitle completed={completed}>{title}</ItemTitle>
+        <ItemState state={state}>{state.toUpperCase()}</ItemState>
+        {state && priority && <Separator>-</Separator>}
+        <ItemPriority priority={priority}>{priority}</ItemPriority>
       </SubWrapper>
-      <TrashIcon src={trash} onClick={() => handleDelete(id)} />
+      <TrashIcon
+        onClick={() => handleDelete(id)}
+        style={{height: '1.2em', width: '1.2em', color: 'white'}}
+      />
     </MainWrapper>
   );
 };
