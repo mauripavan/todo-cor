@@ -1,0 +1,14 @@
+import React from 'react';
+
+import {FilterItem} from './styles';
+import {IFilterButtonProps} from './types';
+
+const FilterButton = ({active, filter, onClick}: IFilterButtonProps) => {
+  return (
+    <FilterItem filter={filter} active={active} onClick={onClick}>
+      <p style={{color: 'white', textAlign: 'center'}}>{filter}</p>
+    </FilterItem>
+  );
+};
+
+export default FilterButton;
