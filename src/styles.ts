@@ -14,4 +14,7 @@ export const TodoWrapper = styled.div`
   background-color: #31315c;
   width: 50vw;
   border-radius: 10px;
+  @media (max-width: 788px) {
+    width: 90vw;
+  }
 `;

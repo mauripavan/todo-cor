@@ -16,8 +16,9 @@ import {
   ItemTitle,
   MainWrapper,
   NoCheckmark,
-  Separator,
+  StateWrapper,
   SubWrapper,
+  TitleWrapper,
 } from './styles';
 
 const TodoItem = (item: Todo) => {
@@ -57,22 +58,25 @@ const TodoItem = (item: Todo) => {
   return (
     <MainWrapper completed={completed} onClick={handleTodoItemClick}>
       <SubWrapper>
-        {completed ? (
-          <CheckmarkWrapper onClick={() => handleSetCompleted(id)}>
-            <Checkmark src={check} />
-          </CheckmarkWrapper>
-        ) : (
-          <NoCheckmark onClick={() => handleSetCompleted(id)} />
-        )}
-        <ItemTitle completed={completed}>{title}</ItemTitle>
-        <ItemState state={state}>{state.toUpperCase()}</ItemState>
-        {state && priority && <Separator>-</Separator>}
-        <ItemPriority priority={priority}>{priority}</ItemPriority>
+        <TitleWrapper>
+          {completed ? (
+            <CheckmarkWrapper onClick={() => handleSetCompleted(id)}>
+              <Checkmark src={check} />
+            </CheckmarkWrapper>
+          ) : (
+            <NoCheckmark onClick={() => handleSetCompleted(id)} />
+          )}
+          <ItemTitle completed={completed}>{title}</ItemTitle>
+        </TitleWrapper>
+        <TrashIcon
+          onClick={() => handleDelete(id)}
+          style={{height: '1.2em', width: '1.2em', color: 'white'}}
+        />
       </SubWrapper>
-      <TrashIcon
-        onClick={() => handleDelete(id)}
-        style={{height: '1.2em', width: '1.2em', color: 'white'}}
-      />
+      <StateWrapper>
+        <ItemState state={state}>{state.toUpperCase()}</ItemState>
+        <ItemPriority priority={priority}>{priority}</ItemPriority>
+      </StateWrapper>
     </MainWrapper>
   );
 };

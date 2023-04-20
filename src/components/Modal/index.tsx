@@ -15,6 +15,7 @@ import {
   CustomTextArea,
   InputWrapper,
   MainWrapper,
+  SelectWrapper,
   SubmitButton,
 } from './styles';
 
@@ -127,14 +128,14 @@ const Modal = (props: IModalProps) => {
           />
         </InputWrapper>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <InputWrapper>
+          <SelectWrapper>
             <CustomSelect onChange={handleChange} value={form.state} id="state">
               <option value="">State</option>
               <option value="new">New</option>
               <option value="in progress">In Progress</option>
             </CustomSelect>
-          </InputWrapper>
-          <InputWrapper>
+          </SelectWrapper>
+          <SelectWrapper>
             <CustomSelect
               onChange={handleChange}
               id="priority"
@@ -145,7 +146,7 @@ const Modal = (props: IModalProps) => {
               <option value="medium">Medium</option>
               <option value="low">Low</option>
             </CustomSelect>
-          </InputWrapper>
+          </SelectWrapper>
         </div>
         <InputWrapper>
           <CustomTextArea
@@ -157,7 +158,9 @@ const Modal = (props: IModalProps) => {
         </InputWrapper>
         <ButtonWrapper>
           <SubmitButton type="submit">
-            <p>{`${selectedTodoItem ? 'Save' : 'Add Task +'}`}</p>
+            <p style={{fontSize: 10}}>{`${
+              selectedTodoItem ? 'Save' : 'Add Task +'
+            }`}</p>
           </SubmitButton>
         </ButtonWrapper>
       </form>

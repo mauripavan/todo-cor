@@ -1,28 +1,14 @@
 import styled from 'styled-components';
-
-export type ItemTitleProps = {
-  completed: boolean;
-};
-
-export type ItemStateProps = {
-  state: string;
-};
-
-export type ItemPriorityProps = {
-  priority: string;
-};
-
-export type ItemProps = {
-  completed: boolean;
-};
+import {
+  ItemPriorityProps,
+  ItemProps,
+  ItemStateProps,
+  ItemTitleProps,
+} from './types';
 
 export const MainWrapper = styled.div<ItemProps>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   cursor: pointer;
-  width: 70%;
-  margin: 0px auto;
+  width: 90%;
   border-radius: 10px;
   margin-top: 10px;
   padding: 5px 10px;
@@ -34,6 +20,8 @@ export const MainWrapper = styled.div<ItemProps>`
 export const SubWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 export const NoCheckmark = styled.span`
@@ -62,6 +50,9 @@ export const CheckmarkWrapper = styled.div`
 export const ItemTitle = styled.p<ItemTitleProps>`
   color: ${({completed}) => (completed ? 'gray' : '#fff')};
   text-decoration: ${({completed}) => (completed ? 'line-through' : 'none')};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const ItemState = styled.p<ItemStateProps>`
@@ -77,6 +68,11 @@ export const ItemPriority = styled.p<ItemPriorityProps>`
   font-size: 10px;
 `;
 
-export const Separator = styled.p`
-  font-size: 10px;
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const StateWrapper = styled.div`
+  display: flex;
 `;

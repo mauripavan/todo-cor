@@ -10,6 +10,9 @@ export const MainWrapper = styled.div`
   background-color: #27264d;
   position: relative;
   margin-top: 2em;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const CustomInput = styled.input`

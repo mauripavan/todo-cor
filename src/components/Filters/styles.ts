@@ -11,12 +11,15 @@ export const FilterBarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
+  width: 100%;
   height: 1.5em;
   border-radius: 50px;
   padding: 3px 0px;
   border: 1px solid white;
   background-color: rgba(223, 117, 11, 0.1);
+  @media (max-width: 788px) {
+    width: 100%;
+  }
 `;
 
 export const ClearButtonWrapper = styled.div`
